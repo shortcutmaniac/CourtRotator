@@ -3,171 +3,109 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Court-Ziehung</title>
+  <title>CourtRotator</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="Court-Ziehung">
+  <meta name="apple-mobile-web-app-title" content="CourtRotator">
   <meta name="theme-color" content="#111827">
   <style>
     :root {
-      --bg: #111827;
-      --card: #1f2937;
-      --text: #f9fafb;
-      --muted: #9ca3af;
-      --button: #22c55e;
-      --button-dark: #16a34a;
-      --danger: #ef4444;
-      --danger-dark: #dc2626;
-      --line: rgba(255,255,255,0.12);
+      --bg:#111827; --card:#1f2937; --text:#f9fafb; --muted:#9ca3af;
+      --green:#22c55e; --green2:#16a34a; --blue:#3b82f6; --blue2:#2563eb;
+      --orange:#f97316; --orange2:#ea580c; --red:#ef4444; --red2:#dc2626;
+      --line:rgba(255,255,255,.12);
     }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      background: radial-gradient(circle at top, #374151 0, var(--bg) 55%);
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
+    *{box-sizing:border-box}
+    body{
+      margin:0; min-height:100vh; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      background:radial-gradient(circle at top,#374151 0,var(--bg) 55%);
+      color:var(--text); display:flex; align-items:center; justify-content:center; padding:24px;
     }
-    .app {
-      width: 100%;
-      max-width: 430px;
-      background: rgba(31,41,55,0.92);
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      padding: 24px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
-      text-align: center;
+    .app{
+      width:100%; max-width:430px; background:rgba(31,41,55,.94); border:1px solid var(--line);
+      border-radius:28px; padding:24px; box-shadow:0 20px 60px rgba(0,0,0,.35); text-align:center;
     }
-    h1 {
-      margin: 0 0 8px;
-      font-size: 28px;
+    h1{margin:0 0 8px; font-size:30px}
+    .sub{margin:0 0 22px; color:var(--muted); font-size:15px; line-height:1.4}
+    .modeBox{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:18px}
+    button{
+      width:100%; border:0; border-radius:18px; padding:18px 16px; color:white;
+      font-size:20px; font-weight:750; cursor:pointer; margin-top:10px; -webkit-tap-highlight-color:transparent;
     }
-    .sub {
-      margin: 0 0 24px;
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.4;
+    .modeBtn{margin:0; padding:16px 10px; font-size:17px; background:#374151; border:1px solid var(--line)}
+    .modeBtn.active.indoor{background:linear-gradient(180deg,var(--blue),var(--blue2))}
+    .modeBtn.active.outdoor{background:linear-gradient(180deg,var(--orange),var(--orange2))}
+    .small{font-size:12px; color:#e5e7eb}
+    .result{
+      min-height:155px; border-radius:24px; background:rgba(17,24,39,.85); border:1px solid var(--line);
+      display:flex; flex-direction:column; align-items:center; justify-content:center; margin-bottom:18px; padding:18px;
     }
-    .result {
-      min-height: 150px;
-      border-radius: 24px;
-      background: rgba(17,24,39,0.85);
-      border: 1px solid var(--line);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-      padding: 18px;
-    }
-    .label {
-      color: var(--muted);
-      font-size: 15px;
-      margin-bottom: 6px;
-    }
-    .number {
-      font-size: 82px;
-      font-weight: 800;
-      line-height: 1;
-      letter-spacing: -2px;
-    }
-    button {
-      width: 100%;
-      border: 0;
-      border-radius: 18px;
-      padding: 18px 16px;
-      color: white;
-      font-size: 20px;
-      font-weight: 700;
-      cursor: pointer;
-      margin-top: 10px;
-      -webkit-tap-highlight-color: transparent;
-    }
-    #drawBtn {
-      background: linear-gradient(180deg, var(--button), var(--button-dark));
-    }
-    #drawBtn:disabled {
-      background: #4b5563;
-      color: #d1d5db;
-      cursor: not-allowed;
-    }
-    #resetBtn {
-      background: linear-gradient(180deg, var(--danger), var(--danger-dark));
-      font-size: 17px;
-      padding: 14px;
-    }
-    .status {
-      margin-top: 18px;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-    }
-    .court {
-      background: rgba(17,24,39,0.7);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 12px 6px;
-    }
-    .court strong {
-      display: block;
-      font-size: 24px;
-      margin-bottom: 3px;
-    }
-    .court span {
-      color: var(--muted);
-      font-size: 13px;
-    }
-    .hint {
-      margin-top: 16px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.4;
-    }
+    .label{color:var(--muted); font-size:15px; margin-bottom:6px}
+    .number{font-size:86px; font-weight:850; line-height:1; letter-spacing:-2px}
+    #drawBtn{background:linear-gradient(180deg,var(--green),var(--green2))}
+    #drawBtn:disabled{background:#4b5563; color:#d1d5db; cursor:not-allowed}
+    #resetBtn{background:linear-gradient(180deg,var(--red),var(--red2)); font-size:17px; padding:14px}
+    .status{margin-top:18px; display:grid; grid-template-columns:repeat(4,1fr); gap:10px}
+    .court{background:rgba(17,24,39,.72); border:1px solid var(--line); border-radius:16px; padding:12px 6px}
+    .court strong{display:block; font-size:25px; margin-bottom:3px}
+    .court span{color:var(--muted); font-size:13px}
+    .hint{margin-top:16px; color:var(--muted); font-size:13px; line-height:1.4}
   </style>
 </head>
 <body>
   <main class="app">
-    <h1>Court-Ziehung</h1>
-    <p class="sub">Zahlen 5, 6, 7 und 8 werden jeweils genau zweimal vergeben.</p>
+    <h1>CourtRotator</h1>
+    <p class="sub">Wähle Indoor oder Outdoor. Jeder Court wird genau zweimal vergeben.</p>
+
+    <div class="modeBox">
+      <button id="outdoorBtn" class="modeBtn outdoor" onclick="setMode('outdoor')">🌳 Outdoor<br><span class="small">Courts 1–4</span></button>
+      <button id="indoorBtn" class="modeBtn indoor" onclick="setMode('indoor')">🏠 Indoor<br><span class="small">Courts 5–8</span></button>
+    </div>
 
     <section class="result">
       <div class="label" id="label">Noch keine Zahl gezogen</div>
       <div class="number" id="number">–</div>
     </section>
 
-    <button id="drawBtn" onclick="drawNumber()">Team zieht Zahl</button>
+    <button id="drawBtn" onclick="drawNumber()">Team zieht Court</button>
     <button id="resetBtn" onclick="resetGame()">Reset</button>
 
     <div class="status" id="status"></div>
-
-    <p class="hint">Tipp: In Safari öffnen → Teilen → „Zum Home-Bildschirm“ hinzufügen.</p>
+    <p class="hint">Der Stand wird automatisch gespeichert. Outdoor und Indoor haben getrennte Ziehungen.</p>
   </main>
 
 <script>
-  const START_POOL = [5, 5, 6, 6, 7, 7, 8, 8];
-  let pool = JSON.parse(localStorage.getItem("courtPool") || "null") || [...START_POOL];
-  let lastDraw = localStorage.getItem("lastDraw") || null;
+  const CONFIG = {
+    outdoor: { name:"Outdoor", courts:[1,2,3,4], pool:[1,1,2,2,3,3,4,4] },
+    indoor:  { name:"Indoor",  courts:[5,6,7,8], pool:[5,5,6,6,7,7,8,8] }
+  };
 
-  function save() {
-    localStorage.setItem("courtPool", JSON.stringify(pool));
-    if (lastDraw !== null) {
-      localStorage.setItem("lastDraw", String(lastDraw));
-    } else {
-      localStorage.removeItem("lastDraw");
-    }
+  let mode = localStorage.getItem("courtMode") || "outdoor";
+  let pool = loadPool(mode);
+  let lastDraw = localStorage.getItem("lastDraw_" + mode) || null;
+
+  function loadPool(selectedMode){
+    const saved = localStorage.getItem("courtPool_" + selectedMode);
+    return saved ? JSON.parse(saved) : [...CONFIG[selectedMode].pool];
   }
 
-  function drawNumber() {
-    if (pool.length === 0) {
-      document.getElementById("label").textContent = "Alle Courts vergeben";
-      document.getElementById("number").textContent = "✓";
-      document.getElementById("drawBtn").disabled = true;
-      return;
-    }
+  function save(){
+    localStorage.setItem("courtMode", mode);
+    localStorage.setItem("courtPool_" + mode, JSON.stringify(pool));
+    if(lastDraw !== null) localStorage.setItem("lastDraw_" + mode, String(lastDraw));
+    else localStorage.removeItem("lastDraw_" + mode);
+  }
 
+  function setMode(newMode){
+    if(newMode === mode) return;
+    mode = newMode;
+    pool = loadPool(mode);
+    lastDraw = localStorage.getItem("lastDraw_" + mode) || null;
+    localStorage.setItem("courtMode", mode);
+    render();
+  }
+
+  function drawNumber(){
+    if(pool.length === 0){ render(); return; }
     const index = Math.floor(Math.random() * pool.length);
     const drawn = pool.splice(index, 1)[0];
     lastDraw = drawn;
@@ -175,42 +113,43 @@
     render();
   }
 
-  function resetGame() {
-    if (!confirm("Wirklich zurücksetzen?")) return;
-    pool = [...START_POOL];
+  function resetGame(){
+    if(!confirm(CONFIG[mode].name + " wirklich zurücksetzen?")) return;
+    pool = [...CONFIG[mode].pool];
     lastDraw = null;
     save();
     render();
   }
 
-  function countUsed(number) {
+  function countUsed(number){
     const remaining = pool.filter(x => x === number).length;
     return 2 - remaining;
   }
 
-  function render() {
+  function render(){
+    document.getElementById("outdoorBtn").classList.toggle("active", mode === "outdoor");
+    document.getElementById("indoorBtn").classList.toggle("active", mode === "indoor");
+
     const label = document.getElementById("label");
     const number = document.getElementById("number");
     const drawBtn = document.getElementById("drawBtn");
 
-    if (lastDraw !== null) {
-      label.textContent = "Gezogener Court";
-      number.textContent = lastDraw;
-    } else {
-      label.textContent = "Noch keine Zahl gezogen";
-      number.textContent = "–";
-    }
-
-    if (pool.length === 0) {
+    if(pool.length === 0){
+      label.textContent = CONFIG[mode].name + ": alle Courts vergeben";
+      number.textContent = lastDraw !== null ? lastDraw : "✓";
       drawBtn.disabled = true;
-      label.textContent = "Alle Courts vergeben";
-      if (lastDraw === null) number.textContent = "✓";
     } else {
       drawBtn.disabled = false;
+      if(lastDraw !== null){
+        label.textContent = CONFIG[mode].name + " Court gezogen";
+        number.textContent = lastDraw;
+      } else {
+        label.textContent = CONFIG[mode].name + ": noch keine Zahl gezogen";
+        number.textContent = "–";
+      }
     }
 
-    const status = document.getElementById("status");
-    status.innerHTML = [5,6,7,8].map(n => `
+    document.getElementById("status").innerHTML = CONFIG[mode].courts.map(n => `
       <div class="court">
         <strong>${n}</strong>
         <span>${countUsed(n)} / 2 vergeben</span>
