@@ -14,68 +14,30 @@
       --red:#ef4444; --red2:#dc2626; --line:rgba(255,255,255,.12);
     }
     *{box-sizing:border-box}
-    body{
-      margin:0; min-height:100vh; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-      background:radial-gradient(circle at top,#374151 0,var(--bg) 58%);
-      color:var(--text); padding:18px;
-    }
-    .app{max-width:980px; margin:0 auto 40px}
-    .top,.card{
-      background:rgba(31,41,55,.94); border:1px solid var(--line); border-radius:26px; padding:20px;
-      box-shadow:0 20px 60px rgba(0,0,0,.25); margin-bottom:14px;
-    }
-    h1{margin:0 0 6px; font-size:30px}
-    h2{font-size:22px; margin:0 0 14px}
-    h3{font-size:17px; margin:18px 0 10px}
-    p{color:var(--muted); line-height:1.45}
-    .grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
-    label{display:block; color:#d1d5db; font-size:14px; margin:10px 0 6px}
-    input,select{
-      width:100%; background:#111827; color:var(--text); border:1px solid var(--line); border-radius:14px;
-      padding:13px 12px; font-size:16px; outline:none;
-    }
-    button{
-      border:0; border-radius:16px; padding:14px 16px; color:white; font-size:16px; font-weight:750;
-      cursor:pointer; -webkit-tap-highlight-color:transparent;
-    }
-    .primary{background:linear-gradient(180deg,var(--green),var(--green2)); width:100%}
-    .secondary{background:linear-gradient(180deg,var(--blue),var(--blue2))}
-    .danger{background:linear-gradient(180deg,var(--red),var(--red2))}
-    .ghost{background:#374151}
-    .smallBtn{padding:9px 10px; border-radius:12px; font-size:13px}
-    .row{display:flex; gap:8px; align-items:center; flex-wrap:wrap}
-    .tabs{display:flex; gap:8px; margin-top:12px; overflow:auto}
-    .tab{background:#374151; white-space:nowrap}
-    .tab.active{background:linear-gradient(180deg,var(--blue),var(--blue2))}
-    .hidden{display:none!important}
-    .muted{color:var(--muted)}
-    .pill{display:inline-block; padding:5px 9px; border-radius:999px; background:#111827; border:1px solid var(--line); color:#d1d5db; font-size:13px}
-    table{width:100%; border-collapse:collapse; overflow:hidden; border-radius:14px}
-    th,td{padding:10px 8px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top}
-    th{color:#d1d5db; font-size:13px; background:rgba(17,24,39,.7)}
-    td{font-size:14px}
-    .match{
-      background:rgba(17,24,39,.72); border:1px solid var(--line); border-radius:18px; padding:14px; margin:10px 0;
-    }
-    .teams{display:grid; grid-template-columns:1fr auto 1fr; gap:10px; align-items:center}
-    .team{background:#0b1220; border:1px solid var(--line); border-radius:14px; padding:12px}
-    .vs{color:var(--muted); font-weight:800}
-    .score{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px}
-    .score input{text-align:center; font-size:22px; font-weight:800}
-    .warn{background:rgba(245,158,11,.12); border:1px solid rgba(245,158,11,.35); color:#fde68a; border-radius:14px; padding:10px; margin:10px 0}
-    @media(max-width:760px){
-      .grid{grid-template-columns:1fr}
-      .teams{grid-template-columns:1fr; text-align:center}
-      .vs{display:none}
-      body{padding:12px}
-    }
+    body{margin:0;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:radial-gradient(circle at top,#374151 0,var(--bg) 58%);color:var(--text);padding:18px}
+    .app{max-width:980px;margin:0 auto 40px}
+    .top,.card{background:rgba(31,41,55,.94);border:1px solid var(--line);border-radius:26px;padding:20px;box-shadow:0 20px 60px rgba(0,0,0,.25);margin-bottom:14px}
+    h1{margin:0 0 6px;font-size:30px} h2{font-size:22px;margin:0 0 14px} h3{font-size:17px;margin:18px 0 10px}
+    p{color:var(--muted);line-height:1.45}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    label{display:block;color:#d1d5db;font-size:14px;margin:10px 0 6px}
+    input,select{width:100%;background:#111827;color:var(--text);border:1px solid var(--line);border-radius:14px;padding:13px 12px;font-size:16px;outline:none}
+    button{border:0;border-radius:16px;padding:14px 16px;color:white;font-size:16px;font-weight:750;cursor:pointer;-webkit-tap-highlight-color:transparent}
+    .primary{background:linear-gradient(180deg,var(--green),var(--green2));width:100%}.secondary{background:linear-gradient(180deg,var(--blue),var(--blue2))}
+    .danger{background:linear-gradient(180deg,var(--red),var(--red2))}.ghost{background:#374151}.smallBtn{padding:9px 10px;border-radius:12px;font-size:13px}
+    .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.tabs{display:flex;gap:8px;margin-top:12px;overflow:auto}.tab{background:#374151;white-space:nowrap}.tab.active{background:linear-gradient(180deg,var(--blue),var(--blue2))}
+    .hidden{display:none!important}.muted{color:var(--muted)}.pill{display:inline-block;padding:5px 9px;border-radius:999px;background:#111827;border:1px solid var(--line);color:#d1d5db;font-size:13px}
+    table{width:100%;border-collapse:collapse;overflow:hidden;border-radius:14px}th,td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{color:#d1d5db;font-size:13px;background:rgba(17,24,39,.7)}td{font-size:14px}
+    .match{background:rgba(17,24,39,.72);border:1px solid var(--line);border-radius:18px;padding:14px;margin:10px 0}.teams{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center}
+    .team{background:#0b1220;border:1px solid var(--line);border-radius:14px;padding:12px}.vs{color:var(--muted);font-weight:800}.score{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.score input{text-align:center;font-size:22px;font-weight:800}
+    .warn{background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.35);color:#fde68a;border-radius:14px;padding:10px;margin:10px 0}
+    @media(max-width:760px){.grid{grid-template-columns:1fr}.teams{grid-template-columns:1fr;text-align:center}.vs{display:none}body{padding:12px}}
   </style>
 </head>
 <body>
 <div class="app">
   <section class="top">
     <h1>Americano Turnier</h1>
-    <p id="subtitle">Erstelle ein Turnier. Level 1 und Level 2 spielen immer komplett getrennt.</p>
+    <p id="subtitle">Level 1 und Level 2 spielen getrennt, aber parallel in denselben Rundennummern.</p>
     <div class="tabs hidden" id="tabs">
       <button class="tab active" onclick="showView('dashboard')" id="tabDashboard">Übersicht</button>
       <button class="tab" onclick="showView('players')" id="tabPlayers">Spieler</button>
@@ -96,10 +58,10 @@
     <h2>Neues Turnier</h2>
     <div class="grid">
       <div><label>Name des Turniers</label><input id="tName" placeholder="z. B. Freitag Americano"></div>
-      <div><label>Anzahl Felder</label><input id="courts" type="number" min="1" value="2"></div>
-      <div><label>Anzahl Personen</label><input id="playerCount" type="number" min="4" value="8" onchange="renderPlayerInputs()"></div>
+      <div><label>Anzahl Felder gesamt</label><input id="courts" type="number" min="1" value="4"></div>
+      <div><label>Anzahl Personen</label><input id="playerCount" type="number" min="4" value="16" onchange="renderPlayerInputs()"></div>
       <div><label>Punkte pro Spiel</label><select id="points"><option value="24" selected>24 Punkte</option><option value="21">21 Punkte</option><option value="16">16 Punkte</option></select></div>
-      <div><label>Gruppen</label><select id="useGroups" onchange="renderPlayerInputs()"><option value="no">Eine Gruppe</option><option value="yes">Zwei Gruppen: Level 1 stark / Level 2 mittel</option></select></div>
+      <div><label>Gruppen</label><select id="useGroups" onchange="renderPlayerInputs()"><option value="no">Eine Gruppe</option><option value="yes" selected>Zwei Gruppen: Level 1 stark / Level 2 mittel</option></select></div>
     </div>
     <h3>Spieler eintragen</h3>
     <div id="playerInputs"></div>
@@ -107,151 +69,143 @@
     <button class="ghost" style="width:100%;margin-top:10px" onclick="backToStart()">Zurück</button>
   </section>
 
-  <section id="dashboardView" class="hidden">
-    <div class="card">
-      <h2 id="dashTitle"></h2>
-      <div class="row">
-        <span class="pill" id="dashCourts"></span><span class="pill" id="dashPoints"></span><span class="pill" id="dashPlayers"></span>
-      </div>
-      <p id="dashInfo"></p>
-      <div class="grid">
-        <button class="secondary" onclick="showView('schedule')">Zum Spielplan</button>
-        <button class="secondary" onclick="showView('standings')">Zur Tabelle</button>
-      </div>
-    </div>
-  </section>
-
+  <section id="dashboardView" class="hidden"><div class="card"><h2 id="dashTitle"></h2><div class="row"><span class="pill" id="dashCourts"></span><span class="pill" id="dashPoints"></span><span class="pill" id="dashPlayers"></span><span class="pill" id="dashRounds"></span></div><p id="dashInfo"></p><div class="grid"><button class="secondary" onclick="showView('schedule')">Zum Spielplan</button><button class="secondary" onclick="showView('standings')">Zur Tabelle</button></div></div></section>
   <section id="playersView" class="hidden"><div class="card"><h2>Spieler bearbeiten</h2><div id="editPlayers"></div><button class="primary" onclick="savePlayersAndRegenerate()">Spieler speichern & Spielplan neu erstellen</button><p class="warn">Achtung: Dabei werden bisherige Ergebnisse gelöscht.</p></div></section>
   <section id="scheduleView" class="hidden"><div class="card"><div class="row" style="justify-content:space-between"><h2>Spielplan</h2><button class="ghost smallBtn" onclick="regenerateSchedule()">Neu mischen</button></div><div id="schedule"></div></div></section>
   <section id="standingsView" class="hidden"><div class="card"><h2>Tabelle</h2><div id="standings"></div></div></section>
-  <section id="settingsView" class="hidden"><div class="card"><h2>Einstellungen</h2><div class="grid"><div><label>Turniername</label><input id="setName"></div><div><label>Anzahl Felder</label><input id="setCourts" type="number" min="1"></div><div><label>Punkte pro Spiel</label><select id="setPoints"><option value="24">24 Punkte</option><option value="21">21 Punkte</option><option value="16">16 Punkte</option></select></div></div><button class="primary" style="margin-top:12px" onclick="saveSettings()">Einstellungen speichern</button><button class="danger" style="width:100%;margin-top:12px" onclick="deleteTournament()">Turnier löschen</button></div></section>
+  <section id="settingsView" class="hidden"><div class="card"><h2>Einstellungen</h2><div class="grid"><div><label>Turniername</label><input id="setName"></div><div><label>Anzahl Felder gesamt</label><input id="setCourts" type="number" min="1"></div><div><label>Punkte pro Spiel</label><select id="setPoints"><option value="24">24 Punkte</option><option value="21">21 Punkte</option><option value="16">16 Punkte</option></select></div></div><button class="primary" style="margin-top:12px" onclick="saveSettings()">Einstellungen speichern</button><button class="danger" style="width:100%;margin-top:12px" onclick="deleteTournament()">Turnier löschen</button></div></section>
 </div>
 
 <script>
-let tournament=null, currentView="dashboard";
+let tournament=null;
 const $=id=>document.getElementById(id);
+function uid(){return crypto.randomUUID?crypto.randomUUID():String(Date.now()+Math.random())}
+function esc(str){return String(str).replace(/[&<>"']/g,s=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[s]))}
 
 function newTournament(){ $("startView").classList.add("hidden"); $("setupView").classList.remove("hidden"); $("tName").value="Americano"; renderPlayerInputs(); }
 function backToStart(){ $("setupView").classList.add("hidden"); $("startView").classList.remove("hidden"); }
-
 function renderPlayerInputs(){
-  const count=Math.max(4,parseInt($("playerCount").value||"8"));
+  const count=Math.max(4,parseInt($("playerCount").value||"16"));
   const useGroups=$("useGroups").value==="yes";
   let html="";
   for(let i=1;i<=count;i++){
-    html += `<div class="grid" style="margin-bottom:8px">
-      <input id="p_${i}" placeholder="Spieler ${i}" value="Spieler ${i}">
-      ${useGroups ? `<select id="g_${i}"><option value="Level 1">Level 1 stark</option><option value="Level 2">Level 2 mittel</option></select>` : ""}
-    </div>`;
+    const defaultGroup = i <= Math.ceil(count/2) ? "Level 1" : "Level 2";
+    html+=`<div class="grid" style="margin-bottom:8px"><input id="p_${i}" placeholder="Spieler ${i}" value="Spieler ${i}">
+    ${useGroups?`<select id="g_${i}"><option value="Level 1" ${defaultGroup==="Level 1"?"selected":""}>Level 1 stark</option><option value="Level 2" ${defaultGroup==="Level 2"?"selected":""}>Level 2 mittel</option></select>`:""}</div>`;
   }
   $("playerInputs").innerHTML=html;
 }
-
-function uid(){ return (crypto.randomUUID?crypto.randomUUID():String(Date.now()+Math.random())); }
-
 function createTournament(){
-  const count=Math.max(4,parseInt($("playerCount").value||"8"));
-  const useGroups=$("useGroups").value==="yes";
-  const players=[];
-  for(let i=1;i<=count;i++){
-    players.push({id:uid(), name:($("p_"+i).value||("Spieler "+i)).trim(), group:useGroups?$("g_"+i).value:"Alle"});
-  }
-  tournament={name:$("tName").value.trim()||"Americano", courts:Math.max(1,parseInt($("courts").value||"1")), points:parseInt($("points").value||"24"), useGroups, players, matches:[], createdAt:new Date().toISOString()};
+  const count=Math.max(4,parseInt($("playerCount").value||"16")), useGroups=$("useGroups").value==="yes", players=[];
+  for(let i=1;i<=count;i++) players.push({id:uid(),name:($("p_"+i).value||("Spieler "+i)).trim(),group:useGroups?$("g_"+i).value:"Alle"});
+  tournament={name:$("tName").value.trim()||"Americano",courts:Math.max(1,parseInt($("courts").value||"1")),points:parseInt($("points").value||"24"),useGroups,players,matches:[],createdAt:new Date().toISOString()};
   generateSchedule(); save(); openApp();
 }
-
-function save(){ localStorage.setItem("americanoTournament",JSON.stringify(tournament)); }
-function loadTournament(){ const s=localStorage.getItem("americanoTournament"); if(!s){alert("Kein gespeichertes Turnier gefunden."); return;} tournament=JSON.parse(s); openApp(); }
+function save(){localStorage.setItem("americanoTournament",JSON.stringify(tournament))}
+function loadTournament(){const s=localStorage.getItem("americanoTournament");if(!s){alert("Kein gespeichertes Turnier gefunden.");return}tournament=JSON.parse(s);openApp()}
 function openApp(){ $("startView").classList.add("hidden"); $("setupView").classList.add("hidden"); $("tabs").classList.remove("hidden"); showView("dashboard"); }
-
 function showView(view){
-  currentView=view;
-  ["dashboard","players","schedule","standings","settings"].forEach(v=>{
-    $(v+"View").classList.toggle("hidden",v!==view);
-    $("tab"+v.charAt(0).toUpperCase()+v.slice(1)).classList.toggle("active",v===view);
-  });
+  ["dashboard","players","schedule","standings","settings"].forEach(v=>{ $(v+"View").classList.toggle("hidden",v!==view); $("tab"+v.charAt(0).toUpperCase()+v.slice(1)).classList.toggle("active",v===view); });
   renderAll();
 }
-
-function renderAll(){
-  if(!tournament)return;
-  $("subtitle").textContent=tournament.name;
-  $("dashTitle").textContent=tournament.name;
-  $("dashCourts").textContent=tournament.courts+" Feld(er)";
-  $("dashPoints").textContent=tournament.points+" Punkte";
-  $("dashPlayers").textContent=tournament.players.length+" Spieler";
-  $("dashInfo").textContent=tournament.useGroups ? "Level 1 und Level 2 spielen komplett getrennt. Es gibt keine gemischten Matches." : "Gespielt wird in einer gemeinsamen Gruppe.";
-  renderPlayersEditor(); renderSchedule(); renderStandings();
-  $("setName").value=tournament.name; $("setCourts").value=tournament.courts; $("setPoints").value=tournament.points;
-}
-
 function groupPlayers(){
-  const groups={};
-  tournament.players.forEach(p=>{ if(!groups[p.group])groups[p.group]=[]; groups[p.group].push(p); });
-  return groups;
+  const groups={}; tournament.players.forEach(p=>{ if(!groups[p.group])groups[p.group]=[]; groups[p.group].push(p); }); return groups;
+}
+function getName(id){const p=tournament.players.find(x=>x.id===id);return p?p.name:"?"}
+function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+
+/*
+  Echter Americano-Plan für gerade Spielerzahl:
+  Bei n Spielern gibt es n-1 Runden. Pro Runde spielt jeder genau einmal.
+  Der Circle-Algorithmus erstellt pro Runde n/2 Paare. Danach werden je 2 Paare zu einem Match kombiniert.
+  Bei 8 Spielern entstehen pro Gruppe 7 Runden mit 2 Matches pro Runde.
+*/
+function pairRounds(players){
+  let ids=players.map(p=>p.id);
+  if(ids.length%2===1) ids.push("BYE");
+  const n=ids.length, rounds=[];
+  let arr=[...ids];
+  for(let r=0;r<n-1;r++){
+    const pairs=[];
+    for(let i=0;i<n/2;i++){
+      const a=arr[i], b=arr[n-1-i];
+      if(a!=="BYE" && b!=="BYE") pairs.push([a,b]);
+    }
+    rounds.push(pairs);
+    arr=[arr[0], arr[n-1], ...arr.slice(1,n-1)];
+  }
+  return rounds;
 }
 
-function shuffle(arr){ const a=[...arr]; for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
-
-function generateMatchesForGroup(players, groupName){
-  // WICHTIG: Diese Funktion bekommt nur Spieler EINER Gruppe. Level 1 und Level 2 können daher nie gemischt werden.
-  const ids=players.map(p=>p.id);
-  const pairs=[];
-  for(let i=0;i<ids.length;i++) for(let j=i+1;j<ids.length;j++) pairs.push([ids[i],ids[j]]);
-  let remaining=shuffle(pairs), matches=[];
-  while(remaining.length>=2){
-    let found=false;
-    for(let i=0;i<remaining.length && !found;i++){
-      for(let j=i+1;j<remaining.length;j++){
-        const a=remaining[i], b=remaining[j], all=[...a,...b];
-        if(new Set(all).size===4){
-          matches.push({id:uid(), group:groupName, teamA:a, teamB:b, scoreA:"", scoreB:""});
-          remaining.splice(j,1); remaining.splice(i,1); found=true; break;
-        }
-      }
+function generateGroupRoundMatches(players, groupName){
+  const pairRoundsList=pairRounds(players);
+  const groupMatches=[];
+  pairRoundsList.forEach((pairs, roundIndex)=>{
+    const shuffledPairs=shuffle(pairs);
+    for(let i=0;i<shuffledPairs.length-1;i+=2){
+      groupMatches.push({
+        id:uid(),
+        group:groupName,
+        groupRound:roundIndex+1,
+        round:roundIndex+1,
+        teamA:shuffledPairs[i],
+        teamB:shuffledPairs[i+1],
+        scoreA:"",
+        scoreB:"",
+        court:null
+      });
     }
-    if(!found) break;
-  }
-  return matches;
-}
-
-function assignRounds(matches){
-  const unscheduled=[...matches]; let roundNo=1;
-  while(unscheduled.length){
-    const used=new Set(), roundMatches=[];
-    for(let i=0;i<unscheduled.length;){
-      const m=unscheduled[i], ids=[...m.teamA,...m.teamB];
-      const free=ids.every(id=>!used.has(id));
-      if(free && roundMatches.length<tournament.courts){ ids.forEach(id=>used.add(id)); m.round=roundNo; m.court=roundMatches.length+1; roundMatches.push(m); unscheduled.splice(i,1); }
-      else i++;
-    }
-    if(roundMatches.length===0){ const m=unscheduled.shift(); m.round=roundNo; m.court=1; }
-    roundNo++;
-  }
+  });
+  return groupMatches;
 }
 
 function generateSchedule(){
   let all=[];
   const groups=groupPlayers();
   Object.keys(groups).forEach(g=>{
-    if(groups[g].length>=4) all=all.concat(generateMatchesForGroup(groups[g],g));
+    if(groups[g].length<4) return;
+    all=all.concat(generateGroupRoundMatches(groups[g],g));
   });
-  assignRounds(all);
+
+  // Courts werden pro gemeinsamer Runde fortlaufend vergeben.
+  const byRound={};
+  all.forEach(m=>{ if(!byRound[m.round])byRound[m.round]=[]; byRound[m.round].push(m); });
+  Object.keys(byRound).sort((a,b)=>a-b).forEach(r=>{
+    byRound[r].sort((a,b)=>a.group.localeCompare(b.group));
+    byRound[r].forEach((m,i)=>m.court=i+1);
+  });
+
   tournament.matches=all;
 }
 
+function roundCount(){
+  if(!tournament || !tournament.matches.length) return 0;
+  return Math.max(...tournament.matches.map(m=>m.round));
+}
+function renderAll(){
+  if(!tournament)return;
+  $("subtitle").textContent=tournament.name;
+  $("dashTitle").textContent=tournament.name;
+  $("dashCourts").textContent=tournament.courts+" Feld(er) gesamt";
+  $("dashPoints").textContent=tournament.points+" Punkte";
+  $("dashPlayers").textContent=tournament.players.length+" Spieler";
+  $("dashRounds").textContent=roundCount()+" Runden";
+  $("dashInfo").textContent=tournament.useGroups?"Level 1 und Level 2 spielen getrennt, aber Runde 1 beider Gruppen läuft parallel, dann Runde 2 usw.":"Eine gemeinsame Gruppe.";
+  renderPlayersEditor(); renderSchedule(); renderStandings();
+  $("setName").value=tournament.name; $("setCourts").value=tournament.courts; $("setPoints").value=tournament.points;
+}
 function regenerateSchedule(){ if(!confirm("Spielplan neu erstellen? Bisherige Ergebnisse werden gelöscht."))return; generateSchedule(); save(); renderAll(); }
-function getName(id){ const p=tournament.players.find(x=>x.id===id); return p?p.name:"?"; }
 
 function renderSchedule(){
   const c=$("schedule");
   if(!tournament.matches.length){ c.innerHTML=`<p class="warn">Nicht genug Spieler. Pro Gruppe brauchst du mindestens 4 Spieler.</p>`; return; }
-  const byRound={};
-  tournament.matches.forEach(m=>{ if(!byRound[m.round])byRound[m.round]=[]; byRound[m.round].push(m); });
+  const byRound={}; tournament.matches.forEach(m=>{ if(!byRound[m.round])byRound[m.round]=[]; byRound[m.round].push(m); });
   let html="";
   Object.keys(byRound).sort((a,b)=>a-b).forEach(r=>{
+    const matches=byRound[r].sort((a,b)=>a.court-b.court);
     html+=`<h3>Runde ${r}</h3>`;
-    byRound[r].forEach(m=>{
+    if(matches.length>tournament.courts) html+=`<p class="warn">Diese Runde hat ${matches.length} Spiele, aber nur ${tournament.courts} Felder eingetragen.</p>`;
+    matches.forEach(m=>{
       html+=`<div class="match">
         <div class="row" style="justify-content:space-between;margin-bottom:8px"><span class="pill">${m.group}</span><span class="pill">Feld ${m.court}</span></div>
         <div class="teams">
@@ -260,92 +214,52 @@ function renderSchedule(){
           <div class="team"><b>Team B</b><br>${getName(m.teamB[0])} & ${getName(m.teamB[1])}</div>
         </div>
         <div class="score">
-          <input type="number" inputmode="numeric" min="0" max="${tournament.points}" value="${m.scoreA}" placeholder="A" onblur="finishScore('${m.id}','A',this.value)" onkeydown="scoreKey(event,'${m.id}','A',this.value)">
-          <input type="number" inputmode="numeric" min="0" max="${tournament.points}" value="${m.scoreB}" placeholder="B" onblur="finishScore('${m.id}','B',this.value)" onkeydown="scoreKey(event,'${m.id}','B',this.value)">
+          <input type="number" inputmode="numeric" min="0" max="${tournament.points}" value="${m.scoreA}" placeholder="A" onblur="finishScore('${m.id}','A',this.value)" onkeydown="scoreKey(event,'${m.id}','A')">
+          <input type="number" inputmode="numeric" min="0" max="${tournament.points}" value="${m.scoreB}" placeholder="B" onblur="finishScore('${m.id}','B',this.value)" onkeydown="scoreKey(event,'${m.id}','B')">
         </div>
       </div>`;
     });
   });
   c.innerHTML=html;
 }
-
-function scoreKey(e,id,side,value){
-  if(e.key==="Enter"){
-    e.preventDefault();
-    finishScore(id,side,e.target.value);
-    e.target.blur();
-  }
-}
-
+function scoreKey(e,id,side){ if(e.key==="Enter"){e.preventDefault();finishScore(id,side,e.target.value);e.target.blur()} }
 function finishScore(matchId,side,value){
   const m=tournament.matches.find(x=>x.id===matchId); if(!m)return;
-  if(value===""){ m.scoreA=""; m.scoreB=""; save(); renderStandings(); return; }
-  let v=parseInt(value);
-  if(isNaN(v)) return;
-  if(v<0)v=0;
-  if(v>tournament.points)v=tournament.points;
-
-  if(side==="A"){ m.scoreA=v; m.scoreB=tournament.points-v; }
-  else { m.scoreB=v; m.scoreA=tournament.points-v; }
-
-  save();
-  renderSchedule();
-  renderStandings();
+  if(value===""){m.scoreA="";m.scoreB="";save();renderStandings();return}
+  let v=parseInt(value); if(isNaN(v))return; if(v<0)v=0; if(v>tournament.points)v=tournament.points;
+  if(side==="A"){m.scoreA=v;m.scoreB=tournament.points-v}else{m.scoreB=v;m.scoreA=tournament.points-v}
+  save(); renderSchedule(); renderStandings();
 }
-
 function renderStandings(){
-  const stats={};
-  tournament.players.forEach(p=>stats[p.id]={name:p.name, group:p.group, points:0, games:0, wins:0});
-  tournament.matches.forEach(m=>{
-    if(m.scoreA===""||m.scoreB==="")return;
-    const a=parseInt(m.scoreA), b=parseInt(m.scoreB);
-    m.teamA.forEach(id=>{stats[id].points+=a; stats[id].games++; if(a>b)stats[id].wins++;});
-    m.teamB.forEach(id=>{stats[id].points+=b; stats[id].games++; if(b>a)stats[id].wins++;});
+  const stats={}; tournament.players.forEach(p=>stats[p.id]={name:p.name,group:p.group,points:0,games:0,wins:0});
+  tournament.matches.forEach(m=>{ if(m.scoreA===""||m.scoreB==="")return; const a=parseInt(m.scoreA), b=parseInt(m.scoreB);
+    m.teamA.forEach(id=>{stats[id].points+=a;stats[id].games++;if(a>b)stats[id].wins++});
+    m.teamB.forEach(id=>{stats[id].points+=b;stats[id].games++;if(b>a)stats[id].wins++});
   });
-  const groups={};
-  Object.values(stats).forEach(s=>{ if(!groups[s.group])groups[s.group]=[]; groups[s.group].push(s); });
-  let html="";
-  Object.keys(groups).forEach(g=>{
-    const rows=groups[g].sort((a,b)=>b.points-a.points||b.wins-a.wins||a.name.localeCompare(b.name));
+  const groups={}; Object.values(stats).forEach(s=>{if(!groups[s.group])groups[s.group]=[];groups[s.group].push(s)});
+  let html=""; Object.keys(groups).sort().forEach(g=>{const rows=groups[g].sort((a,b)=>b.points-a.points||b.wins-a.wins||a.name.localeCompare(b.name));
     html+=`<h3>${g}</h3><table><thead><tr><th>#</th><th>Spieler</th><th>Punkte</th><th>Spiele</th><th>Siege</th></tr></thead><tbody>`;
-    rows.forEach((s,i)=> html+=`<tr><td>${i+1}</td><td>${s.name}</td><td><b>${s.points}</b></td><td>${s.games}</td><td>${s.wins}</td></tr>`);
+    rows.forEach((s,i)=>html+=`<tr><td>${i+1}</td><td>${esc(s.name)}</td><td><b>${s.points}</b></td><td>${s.games}</td><td>${s.wins}</td></tr>`);
     html+=`</tbody></table>`;
   });
   $("standings").innerHTML=html;
 }
-
-function esc(str){return String(str).replace(/[&<>"']/g,s=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[s]));}
-
 function renderPlayersEditor(){
-  let html="";
-  tournament.players.forEach(p=>{
-    html+=`<div class="grid" style="margin-bottom:8px">
-      <input id="editName_${p.id}" value="${esc(p.name)}">
-      ${tournament.useGroups?`<select id="editGroup_${p.id}"><option value="Level 1" ${p.group==="Level 1"?"selected":""}>Level 1 stark</option><option value="Level 2" ${p.group==="Level 2"?"selected":""}>Level 2 mittel</option></select>`:`<input disabled value="${p.group}">`}
-    </div>`;
-  });
+  let html=""; tournament.players.forEach(p=>{html+=`<div class="grid" style="margin-bottom:8px"><input id="editName_${p.id}" value="${esc(p.name)}">
+  ${tournament.useGroups?`<select id="editGroup_${p.id}"><option value="Level 1" ${p.group==="Level 1"?"selected":""}>Level 1 stark</option><option value="Level 2" ${p.group==="Level 2"?"selected":""}>Level 2 mittel</option></select>`:`<input disabled value="${p.group}">`}</div>`});
   $("editPlayers").innerHTML=html;
 }
-
 function savePlayersAndRegenerate(){
   if(!confirm("Spieler speichern und Spielplan neu erstellen? Bisherige Ergebnisse werden gelöscht."))return;
-  tournament.players.forEach(p=>{
-    p.name=$("editName_"+p.id).value.trim()||p.name;
-    if(tournament.useGroups)p.group=$("editGroup_"+p.id).value;
-  });
+  tournament.players.forEach(p=>{p.name=$("editName_"+p.id).value.trim()||p.name;if(tournament.useGroups)p.group=$("editGroup_"+p.id).value});
   generateSchedule(); save(); renderAll(); showView("schedule");
 }
-
 function saveSettings(){
-  tournament.name=$("setName").value.trim()||tournament.name;
-  tournament.courts=Math.max(1,parseInt($("setCourts").value||"1"));
-  tournament.points=parseInt($("setPoints").value||"24");
-  if(confirm("Einstellungen speichern und Spielplan neu erstellen? Bisherige Ergebnisse werden gelöscht.")) generateSchedule();
+  tournament.name=$("setName").value.trim()||tournament.name; tournament.courts=Math.max(1,parseInt($("setCourts").value||"1")); tournament.points=parseInt($("setPoints").value||"24");
+  if(confirm("Einstellungen speichern und Spielplan neu erstellen? Bisherige Ergebnisse werden gelöscht."))generateSchedule();
   save(); renderAll();
 }
-
-function deleteTournament(){ if(!confirm("Turnier wirklich löschen?"))return; localStorage.removeItem("americanoTournament"); location.reload(); }
-
+function deleteTournament(){if(!confirm("Turnier wirklich löschen?"))return;localStorage.removeItem("americanoTournament");location.reload()}
 renderPlayerInputs();
 if(localStorage.getItem("americanoTournament")) $("startView").insertAdjacentHTML("beforeend","<p class='muted'>Gespeichertes Turnier vorhanden.</p>");
 </script>
