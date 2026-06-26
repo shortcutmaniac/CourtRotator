@@ -101,8 +101,8 @@ function createTournament(){
   tournament={name:$("tName").value.trim()||"Americano",courts:Math.max(1,parseInt($("courts").value||"1")),points:parseInt($("points").value||"24"),useGroups,players,matches:[],createdAt:new Date().toISOString()};
   generateSchedule(); save(); openApp();
 }
-function save(){localStorage.setItem("americanoTournament",JSON.stringify(tournament))}
-function loadTournament(){const s=localStorage.getItem("americanoTournament");if(!s){alert("Kein gespeichertes Turnier gefunden.");return}tournament=JSON.parse(s);openApp()}
+function save(){localStorage.setItem("americanoTournament_v4",JSON.stringify(tournament))}
+function loadTournament(){const s=localStorage.getItem("americanoTournament_v4");if(!s){alert("Kein gespeichertes Turnier gefunden.");return}tournament=JSON.parse(s);openApp()}
 function openApp(){ $("startView").classList.add("hidden"); $("setupView").classList.add("hidden"); $("tabs").classList.remove("hidden"); showView("dashboard"); }
 function showView(view){
   ["dashboard","players","schedule","standings","settings"].forEach(v=>{ $(v+"View").classList.toggle("hidden",v!==view); $("tab"+v.charAt(0).toUpperCase()+v.slice(1)).classList.toggle("active",v===view); });
@@ -190,7 +190,9 @@ function renderAll(){
   $("dashPoints").textContent=tournament.points+" Punkte";
   $("dashPlayers").textContent=tournament.players.length+" Spieler";
   $("dashRounds").textContent=roundCount()+" Runden";
-  $("dashInfo").textContent=tournament.useGroups?"Level 1 und Level 2 spielen getrennt, aber Runde 1 beider Gruppen läuft parallel, dann Runde 2 usw.":"Eine gemeinsame Gruppe.";
+  $("dashInfo").textContent=tournament.useGroups
+    ? "Level 1 und Level 2 spielen getrennt und parallel. Bei 8 Spielern pro Gruppe sind es 7 Runden. Jede Runde hat 4 Matches, wenn beide Gruppen je 8 Spieler haben."
+    : "Eine gemeinsame Gruppe. Bei 8 Spielern sind es 7 Runden mit 2 Matches pro Runde.";
   renderPlayersEditor(); renderSchedule(); renderStandings();
   $("setName").value=tournament.name; $("setCourts").value=tournament.courts; $("setPoints").value=tournament.points;
 }
@@ -200,7 +202,7 @@ function renderSchedule(){
   const c=$("schedule");
   if(!tournament.matches.length){ c.innerHTML=`<p class="warn">Nicht genug Spieler. Pro Gruppe brauchst du mindestens 4 Spieler.</p>`; return; }
   const byRound={}; tournament.matches.forEach(m=>{ if(!byRound[m.round])byRound[m.round]=[]; byRound[m.round].push(m); });
-  let html="";
+  let html=`<p class="muted"><b>${roundCount()} Runden</b> geplant. Hinweis: Eine Runde kann mehrere Matches gleichzeitig enthalten.</p>`;
   Object.keys(byRound).sort((a,b)=>a-b).forEach(r=>{
     const matches=byRound[r].sort((a,b)=>a.court-b.court);
     html+=`<h3>Runde ${r}</h3>`;
@@ -259,9 +261,9 @@ function saveSettings(){
   if(confirm("Einstellungen speichern und Spielplan neu erstellen? Bisherige Ergebnisse werden gelöscht."))generateSchedule();
   save(); renderAll();
 }
-function deleteTournament(){if(!confirm("Turnier wirklich löschen?"))return;localStorage.removeItem("americanoTournament");location.reload()}
+function deleteTournament(){if(!confirm("Turnier wirklich löschen?"))return;localStorage.removeItem("americanoTournament_v4");location.reload()}
 renderPlayerInputs();
-if(localStorage.getItem("americanoTournament")) $("startView").insertAdjacentHTML("beforeend","<p class='muted'>Gespeichertes Turnier vorhanden.</p>");
+if(localStorage.getItem("americanoTournament_v4")) $("startView").insertAdjacentHTML("beforeend","<p class='muted'>Gespeichertes v4-Turnier vorhanden.</p>");
 </script>
 </body>
 </html>
