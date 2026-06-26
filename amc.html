@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Americano Pro</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Americano Pro">
+<meta name="theme-color" content="#111827">
+<style>
+:root{
+  --bg:#111827;--card:#1f2937;--dark:#0b1220;--text:#f9fafb;--muted:#9ca3af;
+  --green:#22c55e;--green2:#16a34a;--blue:#3b82f6;--blue2:#2563eb;--red:#ef4444;--red2:#dc2626;
+  --amber:#f59e0b;--line:rgba(255,255,255,.12)
+}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:radial-gradient(circle at top,#374151 0,var(--bg) 58%);color:var(--text);padding:14px}
+.app{max-width:1050px;margin:0 auto 40px}
+.top,.card{background:rgba(31,41,55,.94);border:1px solid var(--line);border-radius:26px;padding:20px;box-shadow:0 18px 50px rgba(0,0,0,.25);margin-bottom:14px}
+h1{margin:0 0 6px;font-size:30px}h2{font-size:22px;margin:0 0 14px}h3{font-size:18px;margin:18px 0 10px}
+p{color:var(--muted);line-height:1.45}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+label{display:block;color:#d1d5db;font-size:14px;margin:10px 0 6px}
+input,select{width:100%;background:#111827;color:var(--text);border:1px solid var(--line);border-radius:14px;padding:13px 12px;font-size:16px;outline:none}
+button{border:0;border-radius:16px;padding:14px 16px;color:white;font-size:16px;font-weight:750;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.primary{background:linear-gradient(180deg,var(--green),var(--green2));width:100%}.secondary{background:linear-gradient(180deg,var(--blue),var(--blue2))}
+.danger{background:linear-gradient(180deg,var(--red),var(--red2))}.ghost{background:#374151}.amber{background:linear-gradient(180deg,#f59e0b,#d97706)}
+.smallBtn{padding:9px 10px;border-radius:12px;font-size:13px}.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.between{justify-content:space-between}
+.tabs{display:flex;gap:8px;margin-top:12px;overflow:auto}.tab{background:#374151;white-space:nowrap}.tab.active{background:linear-gradient(180deg,var(--blue),var(--blue2))}
+.hidden{display:none!important}.muted{color:var(--muted)}.pill{display:inline-block;padding:5px 9px;border-radius:999px;background:#111827;border:1px solid var(--line);color:#d1d5db;font-size:13px}
+.ok{background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.35);color:#bbf7d0;border-radius:14px;padding:10px;margin:10px 0}
+.warn{background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.35);color:#fde68a;border-radius:14px;padding:10px;margin:10px 0}
+table{width:100%;border-collapse:collapse;overflow:hidden;border-radius:14px}th,td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{color:#d1d5db;font-size:13px;background:rgba(17,24,39,.7)}td{font-size:14px}
+.match{background:rgba(17,24,39,.72);border:1px solid var(--line);border-radius:18px;padding:14px;margin:10px 0}
+.teams{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center}.team{background:var(--dark);border:1px solid var(--line);border-radius:14px;padding:12px}.vs{color:var(--muted);font-weight:800}.score{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.score input{text-align:center;font-size:22px;font-weight:800}
+.medal{font-size:20px}
+@media(max-width:760px){.grid,.grid3{grid-template-columns:1fr}.teams{grid-template-columns:1fr;text-align:center}.vs{display:none}body{padding:10px}}
+</style>
+</head>
+<body>
+<div class="app">
+<section class="top">
+  <h1>Americano Pro</h1>
+  <p id="subtitle">Turnier-App für Gruppen, Live-Tabelle und Spaßrunde.</p>
+  <div class="tabs hidden" id="tabs">
+    <button class="tab active" onclick="showView('dashboard')" id="tabDashboard">Übersicht</button>
+    <button class="tab" onclick="showView('players')" id="tabPlayers">Spieler</button>
+    <button class="tab" onclick="showView('schedule')" id="tabSchedule">Spielplan</button>
+    <button class="tab" onclick="showView('standings')" id="tabStandings">Tabelle</button>
+    <button class="tab" onclick="showView('fun')" id="tabFun">Spaßrunde</button>
+    <button class="tab" onclick="showView('settings')" id="tabSettings">Einstellungen</button>
+  </div>
+</section>
+
+<section id="startView" class="card">
+  <h2>Startseite</h2>
+  <button class="primary" onclick="newTournament()">+ Neues Turnier</button>
+  <button class="ghost" style="width:100%;margin-top:10px" onclick="loadTournament()">Gespeichertes Turnier laden</button>
+  <p class="muted">Alles wird nur auf diesem Gerät gespeichert.</p>
+</section>
+
+<section id="setupView" class="card hidden">
+  <h2>Neues Turnier</h2>
+  <div class="grid">
+    <div><label>Turniername</label><input id="tName" value="Americano"></div>
+    <div><label>Anzahl Felder gesamt</label><input id="courts" type="number" min="1" value="4" oninput="renderPlayerInputs()"></div>
+    <div><label>Anzahl Personen gesamt</label><input id="playerCount" type="number" min="4" value="16" onchange="renderPlayerInputs()"></div>
+    <div><label>Punkte pro Spiel</label><select id="points"><option value="24" selected>24 Punkte</option><option value="21">21 Punkte</option><option value="16">16 Punkte</option></select></div>
+    <div><label>Gruppen</label><select id="useGroups" onchange="renderPlayerInputs()"><option value="yes" selected>Zwei Gruppen: Level 1 / Level 2</option><option value="no">Eine Gruppe</option></select></div>
+  </div>
+  <div id="setupCheck"></div>
+  <h3>Spieler eintragen</h3>
+  <div id="playerInputs"></div>
+  <button class="primary" style="margin-top:14px" onclick="createTournament()">Turnier erstellen</button>
+  <button class="ghost" style="width:100%;margin-top:10px" onclick="backToStart()">Zurück</button>
+</section>
+
+<section id="dashboardView" class="hidden">
+  <div class="card">
+    <h2 id="dashTitle"></h2>
+    <div class="row"><span class="pill" id="dashCourts"></span><span class="pill" id="dashPoints"></span><span class="pill" id="dashPlayers"></span><span class="pill" id="dashRounds"></span></div>
+    <p id="dashInfo"></p>
+    <div class="grid3">
+      <button class="secondary" onclick="showView('schedule')">Spielplan</button>
+      <button class="secondary" onclick="showView('standings')">Tabelle</button>
+      <button class="amber" onclick="showView('fun')">Spaßrunde</button>
+    </div>
+  </div>
+</section>
+
+<section id="playersView" class="hidden"><div class="card"><h2>Spieler bearbeiten</h2><div id="editPlayers"></div><button class="primary" onclick="savePlayersAndRegenerate()">Spieler speichern & Spielplan neu erstellen</button><p class="warn">Dabei werden Spielplan, Ergebnisse und Spaßrunde neu gesetzt.</p></div></section>
+<section id="scheduleView" class="hidden"><div class="card"><div class="row between"><h2>Spielplan</h2><button class="ghost smallBtn" onclick="regenerateSchedule()">Neu mischen</button></div><div id="schedule"></div></div></section>
+<section id="standingsView" class="hidden"><div class="card"><div class="row between"><h2>Tabelle</h2><button class="amber smallBtn" onclick="createFunRound()">Spaßrunde erstellen</button></div><div id="standings"></div></div></section>
+<section id="funView" class="hidden"><div class="card"><div class="row between"><h2>Spaßrunde</h2><button class="amber smallBtn" onclick="createFunRound()">Neu aus Tabelle erstellen</button></div><div id="funRound"></div></div></section>
+<section id="settingsView" class="hidden"><div class="card"><h2>Einstellungen</h2><div class="grid"><div><label>Turniername</label><input id="setName"></div><div><label>Anzahl Felder</label><input id="setCourts" type="number" min="1"></div><div><label>Punkte</label><select id="setPoints"><option value="24">24</option><option value="21">21</option><option value="16">16</option></select></div></div><button class="primary" style="margin-top:12px" onclick="saveSettings()">Speichern</button><button class="danger" style="width:100%;margin-top:12px" onclick="deleteTournament()">Turnier löschen</button></div></section>
+</div>
+
+<script>
+const STORE="americanoPro_v1";
+let tournament=null; const $=id=>document.getElementById(id);
+function uid(){return crypto.randomUUID?crypto.randomUUID():String(Date.now()+Math.random())}
+function esc(str){return String(str).replace(/[&<>"']/g,s=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[s]))}
+function roundsForCount(n){return n%2===0?n-1:n}
+function matchesPerRoundForCount(n){return Math.floor(n/4)}
+function newTournament(){$("startView").classList.add("hidden");$("setupView").classList.remove("hidden");renderPlayerInputs()}
+function backToStart(){$("setupView").classList.add("hidden");$("startView").classList.remove("hidden")}
+function renderPlayerInputs(){
+ const count=Math.max(4,parseInt($("playerCount").value||"16")); const useGroups=$("useGroups").value==="yes"; let html="";
+ for(let i=1;i<=count;i++){const g=i<=Math.ceil(count/2)?"Level 1":"Level 2";html+=`<div class="grid" style="margin-bottom:8px"><input id="p_${i}" value="Spieler ${i}">${useGroups?`<select id="g_${i}" onchange="updateSetupCheck()"><option value="Level 1" ${g==="Level 1"?"selected":""}>Level 1 stark</option><option value="Level 2" ${g==="Level 2"?"selected":""}>Level 2 mittel</option></select>`:""}</div>`}
+ $("playerInputs").innerHTML=html; updateSetupCheck();
+}
+function getSetupCounts(){const count=Math.max(4,parseInt($("playerCount").value||"16")); const useGroups=$("useGroups").value==="yes"; if(!useGroups)return {"Alle":count}; const out={"Level 1":0,"Level 2":0}; for(let i=1;i<=count;i++){const el=$("g_"+i);if(el)out[el.value]++} return out}
+function updateSetupCheck(){
+ const counts=getSetupCounts(), courts=parseInt($("courts").value||"4"); let maxRounds=0,total=0,parts=[];
+ Object.keys(counts).forEach(g=>{const n=counts[g]; if(n>=4){maxRounds=Math.max(maxRounds,roundsForCount(n)); total+=matchesPerRoundForCount(n); parts.push(`${g}: ${n} Spieler = ${roundsForCount(n)} Runden`)}else parts.push(`${g}: ${n} Spieler = zu wenig`)});
+ $("setupCheck").innerHTML=`<div class="${total<=courts?"ok":"warn"}">${parts.join("<br>")}<br><b>Geplant: ${maxRounds} Runden</b>, gleichzeitig bis zu ${total} Spiele pro Runde bei ${courts} Feldern.</div>`;
+}
+function createTournament(){
+ const count=Math.max(4,parseInt($("playerCount").value||"16")), useGroups=$("useGroups").value==="yes", players=[];
+ for(let i=1;i<=count;i++)players.push({id:uid(),name:($("p_"+i).value||("Spieler "+i)).trim(),group:useGroups?$("g_"+i).value:"Alle"});
+ tournament={name:$("tName").value.trim()||"Americano",courts:Math.max(1,parseInt($("courts").value||"1")),points:parseInt($("points").value||"24"),useGroups,players,matches:[],funMatches:[],createdAt:new Date().toISOString()};
+ generateSchedule(); save(); openApp();
+}
+function save(){localStorage.setItem(STORE,JSON.stringify(tournament))}
+function loadTournament(){const s=localStorage.getItem(STORE); if(!s){alert("Kein gespeichertes Americano-Pro-Turnier gefunden.");return} tournament=JSON.parse(s); if(!tournament.funMatches)tournament.funMatches=[]; openApp()}
+function openApp(){$("startView").classList.add("hidden");$("setupView").classList.add("hidden");$("tabs").classList.remove("hidden");showView("dashboard")}
+function showView(view){["dashboard","players","schedule","standings","fun","settings"].forEach(v=>{$(v+"View").classList.toggle("hidden",v!==view);$("tab"+v.charAt(0).toUpperCase()+v.slice(1)).classList.toggle("active",v===view)});renderAll()}
+function groupPlayers(){const g={};tournament.players.forEach(p=>{if(!g[p.group])g[p.group]=[];g[p.group].push(p)});return g}
+function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function pairRounds(players){
+ let ids=players.map(p=>p.id); if(ids.length%2===1)ids.push("BYE");
+ const n=ids.length, rounds=[]; let arr=[...ids];
+ for(let r=0;r<n-1;r++){let pairs=[];for(let i=0;i<n/2;i++){let a=arr[i],b=arr[n-1-i];if(a!=="BYE"&&b!=="BYE")pairs.push([a,b])}rounds.push(pairs);arr=[arr[0],arr[n-1],...arr.slice(1,n-1)]}
+ return rounds;
+}
+function generateGroupRoundMatches(players,groupName){
+ const prs=pairRounds(players), out=[];
+ prs.forEach((pairs,ri)=>{let p=shuffle(pairs);for(let i=0;i+1<p.length;i+=2){out.push({id:uid(),type:"main",group:groupName,round:ri+1,teamA:p[i],teamB:p[i+1],scoreA:"",scoreB:"",court:null})}});
+ return out;
+}
+function generateSchedule(){
+ let all=[];const groups=groupPlayers();
+ Object.keys(groups).sort().forEach(g=>{if(groups[g].length>=4)all=all.concat(generateGroupRoundMatches(groups[g],g))});
+ assignCourts(all); tournament.matches=all; tournament.funMatches=[];
+}
+function assignCourts(matches){
+ const byRound={};matches.forEach(m=>{if(!byRound[m.round])byRound[m.round]=[];byRound[m.round].push(m)});
+ Object.keys(byRound).sort((a,b)=>a-b).forEach(r=>byRound[r].sort((a,b)=>a.group.localeCompare(b.group)).forEach((m,i)=>m.court=i+1));
+}
+function roundCount(){return tournament&&tournament.matches.length?Math.max(...tournament.matches.map(m=>m.round)):0}
+function getName(id){let p=tournament.players.find(x=>x.id===id);return p?p.name:"?"}
+function getStats(){
+ const st={}; tournament.players.forEach(p=>st[p.id]={id:p.id,name:p.name,group:p.group,points:0,games:0,wins:0});
+ tournament.matches.forEach(m=>{if(m.scoreA===""||m.scoreB==="")return;let a=parseInt(m.scoreA),b=parseInt(m.scoreB);m.teamA.forEach(id=>{st[id].points+=a;st[id].games++;if(a>b)st[id].wins++});m.teamB.forEach(id=>{st[id].points+=b;st[id].games++;if(b>a)st[id].wins++})});
+ return st;
+}
+function rankedGroups(){
+ const st=getStats(), groups={}; Object.values(st).forEach(s=>{if(!groups[s.group])groups[s.group]=[];groups[s.group].push(s)});
+ Object.keys(groups).forEach(g=>groups[g].sort((a,b)=>b.points-a.points||b.wins-a.wins||a.name.localeCompare(b.name)));
+ return groups;
+}
+function renderAll(){
+ if(!tournament)return;
+ $("subtitle").textContent=tournament.name;$("dashTitle").textContent=tournament.name;$("dashCourts").textContent=tournament.courts+" Felder";$("dashPoints").textContent=tournament.points+" Punkte";$("dashPlayers").textContent=tournament.players.length+" Spieler";$("dashRounds").textContent=roundCount()+" Runden";
+ const groups=groupPlayers(); $("dashInfo").innerHTML=Object.keys(groups).sort().map(g=>`${g}: ${groups[g].length} Spieler`).join("<br>")+"<br>Spaßrunde wird nach Tabellenplatzierung Level 1/Level 2 gemischt.";
+ renderPlayersEditor();renderSchedule();renderStandings();renderFunRound();$("setName").value=tournament.name;$("setCourts").value=tournament.courts;$("setPoints").value=tournament.points;
+}
+function regenerateSchedule(){if(!confirm("Spielplan neu mischen? Ergebnisse und Spaßrunde werden gelöscht."))return;generateSchedule();save();renderAll()}
+function renderSchedule(){
+ const byRound={};tournament.matches.forEach(m=>{if(!byRound[m.round])byRound[m.round]=[];byRound[m.round].push(m)});
+ let html=`<p class="ok"><b>${roundCount()} Runden</b>. Eine Runde enthält mehrere parallele Matches.</p>`;
+ Object.keys(byRound).sort((a,b)=>a-b).forEach(r=>{let ms=byRound[r].sort((a,b)=>a.court-b.court);html+=`<h3>Runde ${r} <span class="pill">${ms.length} Matches</span></h3>`; if(ms.length>tournament.courts)html+=`<p class="warn">${ms.length} Matches, aber nur ${tournament.courts} Felder.</p>`; ms.forEach(m=>html+=matchHtml(m,"main"))});
+ $("schedule").innerHTML=html;
+}
+function matchHtml(m,kind){
+ return `<div class="match"><div class="row between" style="margin-bottom:8px"><span class="pill">${esc(m.group||"Spaßrunde")}</span><span class="pill">Feld ${m.court||"-"}</span></div><div class="teams"><div class="team"><b>Team A</b><br>${getName(m.teamA[0])} & ${getName(m.teamA[1])}</div><div class="vs">VS</div><div class="team"><b>Team B</b><br>${getName(m.teamB[0])} & ${getName(m.teamB[1])}</div></div><div class="score"><input type="number" inputmode="numeric" value="${m.scoreA}" placeholder="A" onblur="finishScore('${m.id}','${kind}','A',this.value)" onkeydown="scoreKey(event,'${m.id}','${kind}','A')"><input type="number" inputmode="numeric" value="${m.scoreB}" placeholder="B" onblur="finishScore('${m.id}','${kind}','B',this.value)" onkeydown="scoreKey(event,'${m.id}','${kind}','B')"></div></div>`
+}
+function scoreKey(e,id,kind,side){if(e.key==="Enter"){e.preventDefault();finishScore(id,kind,side,e.target.value);e.target.blur()}}
+function finishScore(id,kind,side,value){
+ let list=kind==="fun"?tournament.funMatches:tournament.matches; let m=list.find(x=>x.id===id); if(!m)return;
+ if(value===""){m.scoreA="";m.scoreB="";save();renderStandings();renderFunRound();return}
+ let v=parseInt(value);if(isNaN(v))return;if(v<0)v=0;if(v>tournament.points)v=tournament.points;
+ if(side==="A"){m.scoreA=v;m.scoreB=tournament.points-v}else{m.scoreB=v;m.scoreA=tournament.points-v}
+ save(); kind==="fun"?renderFunRound():renderSchedule(); renderStandings();
+}
+function renderStandings(){
+ const groups=rankedGroups(); let html="";
+ Object.keys(groups).sort().forEach(g=>{let rows=groups[g];html+=`<h3>${esc(g)}</h3><table><thead><tr><th>#</th><th>Spieler</th><th>Punkte</th><th>Spiele</th><th>Siege</th></tr></thead><tbody>`;rows.forEach((s,i)=>html+=`<tr><td>${i+1}</td><td>${i<3?["🥇","🥈","🥉"][i]:""} ${esc(s.name)}</td><td><b>${s.points}</b></td><td>${s.games}</td><td>${s.wins}</td></tr>`);html+="</tbody></table>"});
+ $("standings").innerHTML=html;
+}
+function createFunRound(){
+ const groups=rankedGroups();
+ if(!groups["Level 1"]||!groups["Level 2"]){alert("Spaßrunde braucht Level 1 und Level 2.");return}
+ const a=groups["Level 1"], b=groups["Level 2"], len=Math.min(a.length,b.length);
+ if(len<2){alert("Zu wenig Spieler für Spaßrunde.");return}
+ const matches=[]; let court=1;
+ for(let i=0;i+1<len;i+=2){
+   matches.push({id:uid(),type:"fun",group:`Spaßrunde Plätze ${i+1}/${i+2}`,round:1,court:court++,teamA:[a[i].id,b[i+1].id],teamB:[b[i].id,a[i+1].id],scoreA:"",scoreB:""});
+ }
+ tournament.funMatches=matches; save(); renderAll(); showView("fun");
+}
+function renderFunRound(){
+ if(!tournament.funMatches||!tournament.funMatches.length){$("funRound").innerHTML=`<p class="warn">Noch keine Spaßrunde erstellt. Erst Ergebnisse eintragen, dann aus der Tabelle erstellen.</p><button class="amber" onclick="createFunRound()">Spaßrunde aus aktueller Tabelle erstellen</button>`;return}
+ let html=`<p class="ok">Spaßrunde nach Platzierung: Platz 1 Level 1 + Platz 2 Level 2 gegen Platz 1 Level 2 + Platz 2 Level 1, danach 3/4, 5/6 usw.</p>`;
+ tournament.funMatches.forEach(m=>html+=matchHtml(m,"fun"));
+ $("funRound").innerHTML=html;
+}
+function renderPlayersEditor(){let html="";tournament.players.forEach(p=>html+=`<div class="grid" style="margin-bottom:8px"><input id="editName_${p.id}" value="${esc(p.name)}">${tournament.useGroups?`<select id="editGroup_${p.id}"><option value="Level 1" ${p.group==="Level 1"?"selected":""}>Level 1 stark</option><option value="Level 2" ${p.group==="Level 2"?"selected":""}>Level 2 mittel</option></select>`:`<input disabled value="${p.group}">`}</div>`);$("editPlayers").innerHTML=html}
+function savePlayersAndRegenerate(){if(!confirm("Speichern und neu erstellen? Ergebnisse werden gelöscht."))return;tournament.players.forEach(p=>{p.name=$("editName_"+p.id).value.trim()||p.name;if(tournament.useGroups)p.group=$("editGroup_"+p.id).value});generateSchedule();save();renderAll();showView("schedule")}
+function saveSettings(){tournament.name=$("setName").value.trim()||tournament.name;tournament.courts=Math.max(1,parseInt($("setCourts").value||"1"));tournament.points=parseInt($("setPoints").value||"24");if(confirm("Speichern und neu erstellen? Ergebnisse werden gelöscht."))generateSchedule();save();renderAll()}
+function deleteTournament(){if(!confirm("Turnier wirklich löschen?"))return;localStorage.removeItem(STORE);location.reload()}
+renderPlayerInputs();
+</script>
+</body>
+</html>
